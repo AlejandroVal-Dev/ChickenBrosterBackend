@@ -1,0 +1,8 @@
+﻿Para aplicar la migracion:
+dotnet ef migrations add InitCashboxSchema --context CashboxDbContext --output-dir Migrations --project Modules\Cashbox\Cashbox.Infrastructure --startup-project ChickenBroster.Api
+
+Para actualizar migraciones:
+dotnet ef database update InitCashboxSchema --context CashboxDbContext --project Modules\Cashbox\Cashbox.Infrastructure --startup-project ChickenBroster.Api
+
+dotnet ef migrations add AddSecurityRelationships --context SecurityDbContext --output-dir Migrations --project Modules\Security\Security.Infrastructure --startup-project ChickenBroster.Api
+dotnet ef database update --context SecurityDbContext --project Modules\Security\Security.Infrastructure --startup-project ChickenBroster.Api
