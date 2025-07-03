@@ -8,7 +8,8 @@ namespace Sales.Api.Controllers
 {
     [Route("sales/[controller]")]
     [ApiController]
-    [Authorize]
+    //[Authorize]
+    [AllowAnonymous]
     public class OrderController : ControllerBase
     {
         private readonly IOrderService _orderService;
@@ -40,7 +41,7 @@ namespace Sales.Api.Controllers
             return Ok(result.Value);
         }
 
-        [HttpPost("filter")]
+        [HttpGet("filter")]
         public async Task<IActionResult> GetFiltered([FromBody] OrderFilterDto filter)
         {
             var result = await _orderService.GetFilteredAsync(filter);
@@ -63,10 +64,10 @@ namespace Sales.Api.Controllers
             return CreatedAtAction(nameof(GetById), new { id = result.Value }, createdUnit.Value);
         }
 
-        [HttpPatch("{orderId}/mark-as-paid")]
-        public async Task<IActionResult> MarkAsPaid(int orderId)
+        [HttpPatch("{orderId}/mark-as-completed")]
+        public async Task<IActionResult> MarkAsCompleted(int orderId)
         {
-            var result = await _orderService.MarkAsPaidAsync(orderId);
+            var result = await _orderService.MarkAsCompletedAsync(orderId);
 
             if (result.IsFailure)
                 return BadRequest(result.Error);

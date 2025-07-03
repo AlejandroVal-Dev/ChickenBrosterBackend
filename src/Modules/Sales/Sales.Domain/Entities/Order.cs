@@ -41,6 +41,12 @@ namespace Sales.Domain.Entities
             UpdatedAt = DateTime.UtcNow;
         }
 
+        public void MarkAsCompleted()
+        {
+            Status = OrderStatus.None;
+            UpdatedAt = DateTime.UtcNow;
+        }
+
         public void Cancel()
         {
             Status = OrderStatus.Cancelled;

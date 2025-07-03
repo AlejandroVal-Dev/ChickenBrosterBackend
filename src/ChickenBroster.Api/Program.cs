@@ -17,11 +17,11 @@ namespace ChickenBroster.Api
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            // IPs
-            /*builder.WebHost.ConfigureKestrel(options =>
+            //IPs
+            builder.WebHost.ConfigureKestrel(options =>
             {
                 options.ListenAnyIP(5000);
-            });*/
+            });
 
             //CORS
             builder.Services.AddCors(options =>

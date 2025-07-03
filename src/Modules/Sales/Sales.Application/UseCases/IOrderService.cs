@@ -10,7 +10,7 @@ namespace Sales.Application.UseCases
         Task<Result<OrderDto>> GetByIdAsync(int orderId);
         Task<Result<IReadOnlyList<OrderDto>>> GetFilteredAsync(OrderFilterDto filter);
         Task<Result<int>> CreateOrderAsync(CreateOrderDto request);
-        Task<Result> MarkAsPaidAsync(int orderId);
+        Task<Result> MarkAsCompletedAsync(int orderId);
         Task<Result> CancelAsync(int orderId);
         Task<Result> AddItemAsync(int orderId, AddOrderItemDto request);
         Task<Result> UpdateItemQuantityAsync(UpdateOrderItemDto request);

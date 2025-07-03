@@ -33,7 +33,8 @@ namespace Inventory.Application.Services
                     Ingredients = new List<RecipeIngredientDto>()
                 };
 
-                foreach (var ri in recipe.Ingredients)
+                var ingredients = await _unitOfWork.Ingredients.GetByRecipeId(recipe.Id);
+                foreach (var ri in ingredients)
                 {
                     var ingredient = await _unitOfWork.Ingredients.GetByIdAsync(ri.IngredientId);
                     if (ingredient is null)
@@ -75,7 +76,8 @@ namespace Inventory.Application.Services
                     Ingredients = new List<RecipeIngredientDto>()
                 };
 
-                foreach (var ri in recipe.Ingredients)
+                var ingredients = await _unitOfWork.Ingredients.GetByRecipeId(recipe.Id);
+                foreach (var ri in ingredients)
                 {
                     var ingredient = await _unitOfWork.Ingredients.GetByIdAsync(ri.IngredientId);
                     if (ingredient is null)
@@ -116,7 +118,8 @@ namespace Inventory.Application.Services
                 Ingredients = new List<RecipeIngredientDto>()
             };
 
-            foreach (var ri in recipe.Ingredients)
+            var ingredients = await _unitOfWork.Ingredients.GetByRecipeId(recipe.Id);
+            foreach (var ri in ingredients)
             {
                 var ingredient = await _unitOfWork.Ingredients.GetByIdAsync(ri.IngredientId);
                 if (ingredient is null)
@@ -154,7 +157,8 @@ namespace Inventory.Application.Services
                 Ingredients = new List<RecipeIngredientDto>()
             };
 
-            foreach (var ri in recipe.Ingredients)
+            var ingredients = await _unitOfWork.Ingredients.GetByRecipeId(recipe.Id);
+            foreach (var ri in ingredients)
             {
                 var ingredient = await _unitOfWork.Ingredients.GetByIdAsync(ri.IngredientId);
                 if (ingredient is null)
@@ -278,13 +282,9 @@ namespace Inventory.Application.Services
             if (recipe is null || !recipe.IsActive)
                 return Result.Failure("Recipe not found.");
 
-            var ingredient = await _unitOfWork.Ingredients.GetByIdAsync(request.IngredientId);
-            if (ingredient is null || !ingredient.IsActive)
-                return Result.Failure("Ingredient not found.");
-
-            var ingredientInRecipe = recipe.Ingredients.FirstOrDefault(i => i.IngredientId == request.IngredientId);
-            if (ingredientInRecipe is null)
-                return Result.Failure($"Ingredient {ingredient.Name} is not in recipe {recipe.Name}");
+            var ingredients = await _unitOfWork.Ingredients.GetByRecipeId(recipeId);
+            if (ingredients is null)
+                return Result.Failure($"Ingredient is not in recipe {recipe.Name}");
 
             recipe.UpdateIngredientQuantity(request.IngredientId, request.NewQuantity);
             await _unitOfWork.Recipes.UpdateAsync(recipe);

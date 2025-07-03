@@ -26,5 +26,8 @@ namespace Inventory.Domain.Repositories
         Task AssignCategoryAsync(IngredientCategoryAssigment assignment);
         Task UnassignCategoryAsync(IngredientCategoryAssigment assignment);
         Task<IReadOnlyList<int>> GetAssignedCategoryIdsAsync(int ingredientId);
+
+        // From recipe
+        Task<IReadOnlyList<RecipeIngredient>> GetByRecipeId(int recipeId);
     }
 }

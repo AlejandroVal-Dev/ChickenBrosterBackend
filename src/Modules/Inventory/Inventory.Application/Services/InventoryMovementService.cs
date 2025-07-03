@@ -23,7 +23,7 @@ namespace Inventory.Application.Services
 
             foreach (var movement in movements)
             { 
-                var ingredient = await _unitOfWork.Ingredients.GetByIdAsync(movement.Id);
+                var ingredient = await _unitOfWork.Ingredients.GetByIdAsync(movement.IngredientId);
                 if (ingredient is null)
                     return Result<IReadOnlyList<InventoryMovementDto>>.Failure("Ingredient not found.");
 
@@ -53,7 +53,7 @@ namespace Inventory.Application.Services
             if (movement is null)
                 return Result<InventoryMovementDto>.Failure("Movement does not exist.");
 
-            var ingredient = await _unitOfWork.Ingredients.GetByIdAsync(movement.Id);
+            var ingredient = await _unitOfWork.Ingredients.GetByIdAsync(movement.IngredientId);
             if (ingredient is null)
                 return Result<InventoryMovementDto>.Failure("Ingredient not found.");
 
@@ -83,7 +83,7 @@ namespace Inventory.Application.Services
 
             foreach (var movement in movements)
             {
-                var ingredient = await _unitOfWork.Ingredients.GetByIdAsync(movement.Id);
+                var ingredient = await _unitOfWork.Ingredients.GetByIdAsync(movement.IngredientId);
                 if (ingredient is null)
                     return Result<IReadOnlyList<InventoryMovementDto>>.Failure("Ingredient not found.");
 

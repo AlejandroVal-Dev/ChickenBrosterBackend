@@ -284,5 +284,6 @@ namespace Inventory.Application.Services
 
             return Result.Success();
         }
+
     }
 }

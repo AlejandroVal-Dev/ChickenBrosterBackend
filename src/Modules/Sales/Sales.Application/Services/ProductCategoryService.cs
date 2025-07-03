@@ -137,5 +137,16 @@ namespace Sales.Application.Services
 
             return Result.Success();
         }
+
+        public async Task<Result<IReadOnlyList<int>>> GetAssignedByProduct(int productId)
+        {
+            var categoryIds = await _unitOfWork.Products.GetAssignedCategoryIdsAsync(productId);
+
+            if (categoryIds == null || categoryIds.Count == 0)
+                return Result<IReadOnlyList<int>>.Failure("No se encontraron categorías asignadas.");
+
+            return Result<IReadOnlyList<int>>.Success(categoryIds);
+        }
+
     }
 }

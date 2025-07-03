@@ -14,5 +14,6 @@ namespace Inventory.Application.UseCases
         Task<Result> UpdateAsync(UpdateIngredientCategoryDto request);
         Task<Result> DeleteAsync(int id);
         Task<Result> RestoreAsync(int id);
+        Task<Result<IReadOnlyList<int>>> GetAssignedByIngredient(int ingredientId);
     }
 }

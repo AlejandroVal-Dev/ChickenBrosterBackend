@@ -7,7 +7,8 @@ namespace Sales.Api.Controllers
 {
     [Route("sales/[controller]")]
     [ApiController]
-    [Authorize]
+    //[Authorize]
+    [AllowAnonymous]
     public class ProductCategoryController : ControllerBase
     {
         private readonly IProductCategoryService _productCategoryService;
@@ -106,5 +107,17 @@ namespace Sales.Api.Controllers
             return NoContent();
         }
 
+        [HttpGet("{productId}/assigned-categories")]
+        public async Task<IActionResult> GetAssignedCategories(int productId)
+        {
+            var result = await _productCategoryService.GetAssignedByProduct(productId);
+
+            if (result.IsFailure)
+            {
+                return NotFound(result.Error);
+            }
+
+            return Ok(result.Value);
+        }
     }
 }

@@ -8,7 +8,8 @@ namespace Sales.Api.Controllers
 {
     [Route("sales/[controller]")]
     [ApiController]
-    [Authorize]
+    //[Authorize]
+    [AllowAnonymous]
     public class ProductController : ControllerBase
     {
         private readonly IProductService _productService;
@@ -118,7 +119,7 @@ namespace Sales.Api.Controllers
             return NoContent();
         }
 
-        [HttpPost("assign-category")]
+        [HttpPut("assign-category")]
         public async Task<IActionResult> AssignCategory([FromBody] ProductCategoryAssignmentDto dto)
         {
             var result = await _productService.AssignCategoryAsync(dto);
@@ -128,7 +129,7 @@ namespace Sales.Api.Controllers
             return Ok();
         }
 
-        [HttpPost("unassign-category")]
+        [HttpPut("unassign-category")]
         public async Task<IActionResult> UnassignCategory([FromBody] ProductCategoryAssignmentDto dto)
         {
             var result = await _productService.UnassignCategoryAsync(dto);

@@ -7,7 +7,8 @@ namespace Inventory.Api.Controllers
 {
     [Route("inventory/[controller]")]
     [ApiController]
-    [Authorize]
+    //[Authorize]
+    [AllowAnonymous]
     public class InventoryMovementController : ControllerBase
     {
         private readonly IInventoryMovementService _inventoryMovementService;

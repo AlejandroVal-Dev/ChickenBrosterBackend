@@ -13,5 +13,6 @@ namespace Sales.Application.UseCases
         Task<Result> UpdateCategoryAsync(UpdateProductCategoryDto request);
         Task<Result> DeleteCategoryAsync(int categoryId);
         Task<Result> RestoreCategoryAsync(int categoryId);
+        Task<Result<IReadOnlyList<int>>> GetAssignedByProduct(int productId);
     }
 }

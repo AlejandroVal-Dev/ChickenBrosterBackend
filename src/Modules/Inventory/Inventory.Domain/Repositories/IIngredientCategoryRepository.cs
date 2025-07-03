@@ -21,5 +21,6 @@ namespace Inventory.Domain.Repositories
         Task UpdateAsync(IngredientCategory category);
         Task DeactivateAsync(IngredientCategory category);
         Task RestoreAsync(IngredientCategory category);
+
     }
 }

@@ -8,7 +8,8 @@ namespace Inventory.Api.Controllers
 {
     [Route("inventory/[controller]")]
     [ApiController]
-    [Authorize]
+    //[Authorize]
+    [AllowAnonymous]
     public class IngredientController : ControllerBase
     {
         private readonly IIngredientService _ingredientService;
@@ -29,7 +30,7 @@ namespace Inventory.Api.Controllers
             return Ok(result.Value);
         }
 
-        [HttpGet("active")]
+        [HttpGet("actives")]
         public async Task<IActionResult> GetActives()
         {
             var result = await _ingredientService.GetActivesAsync();

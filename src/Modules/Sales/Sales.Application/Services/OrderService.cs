@@ -163,13 +163,13 @@ namespace Sales.Application.Services
             return Result<int>.Success(order.Id);
         }
 
-        public async Task<Result> MarkAsPaidAsync(int orderId)
+        public async Task<Result> MarkAsCompletedAsync(int orderId)
         {
             var order = await _unitOfWork.Orders.GetByIdAsync(orderId);
             if (order is null)
                 return Result.Failure("Order not found");
 
-            order.MarkAsPaid();
+            order.MarkAsCompleted();
             await _unitOfWork.Orders.UpdateAsync(order);
             await _unitOfWork.CommitAsync();
 

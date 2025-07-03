@@ -8,7 +8,8 @@ namespace Inventory.Api.Controllers
 {
     [Route("inventory/[controller]")]
     [ApiController]
-    [Authorize]
+    //[Authorize]
+    [AllowAnonymous]
     public class RecipeController : ControllerBase
     {
         private readonly IRecipeService _recipeService;

@@ -24,7 +24,9 @@ namespace Inventory.Infrastructure.Repository
         public async Task<IReadOnlyList<Domain.Entities.Inventory>> GetActivesAsync()
         {
             return await _database.Inventories
-                .Where(x => x.IsActive)
+                .Where(inv => inv.IsActive &&
+                              _database.Ingredients
+                                  .Any(ing => ing.Id == inv.IngredientId && ing.IsActive))
                 .AsNoTracking()
                 .ToListAsync();
         }

@@ -115,5 +115,12 @@ namespace Inventory.Infrastructure.Repository
                 .Select(a => a.CategoryId)
                 .ToListAsync();
         }
+
+        public async Task<IReadOnlyList<RecipeIngredient>> GetByRecipeId(int recipeId)
+        {
+            return await _database.RecipeIngredients
+                .Where(ri => ri.RecipeId == recipeId)
+                .ToListAsync();
+        }
     }
 }

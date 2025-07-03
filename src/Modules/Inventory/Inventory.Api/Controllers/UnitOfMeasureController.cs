@@ -7,7 +7,8 @@ namespace Inventory.Api.Controllers
 {
     [Route("inventory/[controller]")]
     [ApiController]
-    [Authorize]
+    //[Authorize]
+    [AllowAnonymous]
     public class UnitOfMeasureController : ControllerBase
     {
         private readonly IUnitOfMeasureService _unitOfMeasureService;
@@ -28,7 +29,7 @@ namespace Inventory.Api.Controllers
             return Ok(result.Value);
         }
 
-        [HttpGet("active")]
+        [HttpGet("actives")]
         public async Task<IActionResult> GetActives()
         {
             var result = await _unitOfMeasureService.GetActivesAsync();

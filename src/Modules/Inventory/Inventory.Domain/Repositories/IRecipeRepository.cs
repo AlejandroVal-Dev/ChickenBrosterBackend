@@ -18,5 +18,6 @@ namespace Inventory.Domain.Repositories
         Task UpdateAsync(Recipe recipe);
         Task DeactivateAsync(Recipe recipe);
         Task RestoreAsync(Recipe recipe);
+
     }
 }

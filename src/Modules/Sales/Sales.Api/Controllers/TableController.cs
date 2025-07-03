@@ -7,7 +7,8 @@ namespace Sales.Api.Controllers
 {
     [Route("sales/[controller]")]
     [ApiController]
-    [Authorize]
+    //[Authorize]
+    [AllowAnonymous]
     public class TableController : ControllerBase
     {
         private readonly ITableService _tableService;

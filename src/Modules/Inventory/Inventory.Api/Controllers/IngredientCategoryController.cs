@@ -7,7 +7,8 @@ namespace Inventory.Api.Controllers
 {
     [Route("inventory/[controller]")]
     [ApiController]
-    [Authorize]
+    //[Authorize]
+    [AllowAnonymous]
     public class IngredientCategoryController : ControllerBase
     {
         private readonly IIngredientCategoryService _ingredientCategoryService;
@@ -115,6 +116,19 @@ namespace Inventory.Api.Controllers
                 return BadRequest(result.Error);
 
             return NoContent();
+        }
+
+        [HttpGet("{ingredientId}/assigned-categories")]
+        public async Task<IActionResult> GetAssignedCategories(int ingredientId)
+        {
+            var result = await _ingredientCategoryService.GetByIngredientIdAsync(ingredientId);
+
+            if (result.IsFailure)
+            {
+                return NotFound(result.Error);
+            }
+
+            return Ok(result.Value);
         }
     }
 }
